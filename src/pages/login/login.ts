@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {AuthProvider} from '../../providers/auth-provider'
+import {HomePage} from '../home/home'
 
 /*
   Generated class for the Login page.
@@ -14,24 +15,30 @@ import {AuthProvider} from '../../providers/auth-provider'
 })
 export class LoginPage {
    auth: AuthProvider;
+   navCtl : NavController;
+   public login = {email:"", password: ""};
   constructor(public navCtrl: NavController, public authProvider: AuthProvider) {
       this.auth = authProvider;
+      this.navCtl = navCtrl;
   }
 
   ionViewDidLoad() {
     console.log('Hello Login Page');
   }
-  onSubmit(formData) {
-    if(formData.valid) {
-      console.log(formData.value);
-      this.auth.login(formData.value.email, formData.value.password)
-      .subscribe(users => {
-        console.log(users)
+  onSubmit() {
+    if(this.login.email != "" && this.login.password != "") {
+      this.auth.login(this.login.email, this.login.password)
+      .subscribe(user => {
+        window.localStorage['loggenUser'] = JSON.stringify(user);
+        window.localStorage['loggedIn'] = true;
+        this.navCtl.setRoot(HomePage);
       },
         err => {
           alert(err);
         }
        );
+    }else{
+      alert("Please Enter Email/Password ");
     }
   }
 

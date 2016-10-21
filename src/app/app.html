@@ -1,16 +1,33 @@
 <ion-menu [content]="content">
 
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Pages</ion-title>
-    </ion-toolbar>
+    
+  <ion-item color="primary" class="nav-bar">
+    <ion-avatar  item-left>
+      <img src="http://placehold.it/80x80">
+    </ion-avatar>
+    <h2 *ngIf="loggedIn">{{ loggenUser.name}}</h2>
+    <p *ngIf="loggedIn">{{ loggenUser.email}}</p>
+  </ion-item>
+
   </ion-header>
 
   <ion-content>
     <ion-list>
       <button ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}" item-left></ion-icon>
         {{p.title}}
       </button>
+
+      <button ion-item (click)="feedBack()">
+      <ion-icon name="md-send" item-left></ion-icon>
+        Feedback
+      </button>
+      <button ion-item (click)="logOut()">
+      <ion-icon name="md-exit" item-left></ion-icon>
+        Logout
+      </button>
+      
     </ion-list>
   </ion-content>
 

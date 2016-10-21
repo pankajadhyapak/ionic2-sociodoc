@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {ApiProvider} from '../../providers/api-provider'
 import {StorageProvider} from '../../providers/storage-provider'
-
 /*
   Generated class for the Home page.
 
@@ -14,9 +14,18 @@ import {StorageProvider} from '../../providers/storage-provider'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public provider: StorageProvider) {
+  constructor(public navCtrl: NavController, public provider: StorageProvider, public api : ApiProvider) {
+
       if(provider.isLoggedIn()){
           console.log("Logged In");
+          api.getAllDoctors()
+          .subscribe(user => {
+            window.localStorage['appData'] = JSON.stringify(user);
+          },
+            err => {
+              alert(err);
+            }
+           );
       }else{
           console.log("Not Logged In");
       }

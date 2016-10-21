@@ -5,6 +5,7 @@ import { StatusBar } from 'ionic-native';
 import { HomePage } from '../pages/home/home';
 import {StorageProvider} from '../providers/storage-provider';
 import { LoginPage } from '../pages/login/login';
+import {AllDoctorsPage} from '../pages/all-doctors/all-doctors';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,7 +15,9 @@ export class MyApp {
 
   // make HelloIonicPage the root (or first) page
   rootPage: any = HomePage;
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
+  loggedIn: boolean = false;
+  loggenUser : any;
 
   constructor(
     public platform: Platform,
@@ -22,19 +25,21 @@ export class MyApp {
     public provider: StorageProvider
   ) {
     this.initializeApp();
-    this.checkAuth(provider); 
-    // set our app's pages
-    this.pages = [
-      { title: 'Home', component: HomePage }
-    ];
-  }
-  checkAuth(provider): void { 
-      if(provider.isLoggedIn()) {
+    if(window.localStorage['loggedIn']) {
         this.rootPage = HomePage;
+        this.loggedIn = true;
+        this.loggenUser = JSON.parse(window.localStorage['loggenUser']);
       } else {
         this.rootPage = LoginPage;
-      }
-    }   
+        this.loggedIn = false;
+     }
+    // set our app's pages
+    this.pages = [
+      { title: 'Home', component: HomePage, icon:'md-home' },
+      { title: 'All Doctors', component: AllDoctorsPage, icon:'md-people'}
+    ];
+  }
+ 
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -48,5 +53,14 @@ export class MyApp {
     this.menu.close();
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
+  }
+  feedBack(){
+    alert("Feedback");
+  }
+  logOut(){
+    this.menu.close();
+    window.localStorage.removeItem("loggedIn");
+    window.localStorage.removeItem("loggenUser");
+    this.nav.setRoot(LoginPage);
   }
 }

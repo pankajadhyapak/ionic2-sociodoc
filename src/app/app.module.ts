@@ -6,12 +6,16 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import {StorageProvider} from '../providers/storage-provider';
 import {AuthProvider} from '../providers/auth-provider';
+import {AllDoctorsPage} from '../pages/all-doctors/all-doctors'
+import {ApiProvider} from '../providers/api-provider';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AllDoctorsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -21,8 +25,9 @@ import {AuthProvider} from '../providers/auth-provider';
     MyApp,
     HomePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    AllDoctorsPage
   ],
-  providers: [StorageProvider, AuthProvider]
+  providers: [StorageProvider, AuthProvider, ApiProvider]
 })
 export class AppModule {}
