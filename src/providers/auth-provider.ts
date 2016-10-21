@@ -17,6 +17,7 @@ export class AuthProvider {
 
   login(email : string, password : string): Observable<any>{
     return this.http.post("http://api5.sociodoc.com/api/login", {"email": email, "password": password}, null)
-      .map(res => <any>(res.json()));
+      .map(res => <any>(res.json()))
+      .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 }

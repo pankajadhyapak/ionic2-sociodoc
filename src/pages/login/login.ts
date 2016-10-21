@@ -24,9 +24,14 @@ export class LoginPage {
   onSubmit(formData) {
     if(formData.valid) {
       console.log(formData.value);
-      this.auth.login(formData.value.email, formData.value.password).subscribe(users => {
-      console.log(users)
-    });
+      this.auth.login(formData.value.email, formData.value.password)
+      .subscribe(users => {
+        console.log(users)
+      },
+        err => {
+          alert(err);
+        }
+       );
     }
   }
 
