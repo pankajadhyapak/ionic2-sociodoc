@@ -1,11 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-
-import { Platform, MenuController, Nav } from 'ionic-angular';
-import { StatusBar } from 'ionic-native';
-import { HomePage } from '../pages/home/home';
-import {StorageProvider} from '../providers/storage-provider';
-import { LoginPage } from '../pages/login/login';
-import {AllDoctorsPage} from '../pages/all-doctors/all-doctors';
+import {Component, ViewChild} from "@angular/core";
+import {Platform, MenuController, Nav} from "ionic-angular";
+import {StatusBar} from "ionic-native";
+import {HomePage} from "../pages/home/home";
+import {StorageProvider} from "../providers/storage-provider";
+import {LoginPage} from "../pages/login/login";
+import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,29 +16,27 @@ export class MyApp {
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any, icon: string}>;
   loggedIn: boolean = false;
-  loggenUser : any;
+  loggenUser: any;
 
-  constructor(
-    public platform: Platform,
-    public menu: MenuController,
-    public provider: StorageProvider
-  ) {
+  constructor(public platform: Platform,
+              public menu: MenuController,
+              public provider: StorageProvider) {
     this.initializeApp();
-    if(window.localStorage['loggedIn']) {
-        this.rootPage = HomePage;
-        this.loggedIn = true;
-        this.loggenUser = JSON.parse(window.localStorage['loggenUser']);
-      } else {
-        this.rootPage = LoginPage;
-        this.loggedIn = false;
-     }
+    if (window.localStorage['loggedIn']) {
+      this.rootPage = HomePage;
+      this.loggedIn = true;
+      this.loggenUser = JSON.parse(window.localStorage['loggenUser']);
+    } else {
+      this.rootPage = LoginPage;
+      this.loggedIn = false;
+    }
     // set our app's pages
     this.pages = [
-      { title: 'Home', component: HomePage, icon:'md-home' },
-      { title: 'All Doctors', component: AllDoctorsPage, icon:'md-people'}
+      {title: 'Home', component: HomePage, icon: 'md-home'},
+      {title: 'All Doctors', component: AllDoctorsPage, icon: 'md-people'}
     ];
   }
- 
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -54,13 +51,14 @@ export class MyApp {
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }
-  feedBack(){
+
+  feedBack() {
     alert("Feedback");
   }
-  logOut(){
+
+  logOut() {
     this.menu.close();
-    window.localStorage.removeItem("loggedIn");
-    window.localStorage.removeItem("loggenUser");
+    window.localStorage.clear();
     this.nav.setRoot(LoginPage);
   }
 }
