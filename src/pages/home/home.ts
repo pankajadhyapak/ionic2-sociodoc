@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, Events} from 'ionic-angular';
 import {ApiProvider} from '../../providers/api-provider'
 import {StorageProvider} from '../../providers/storage-provider'
 /*
@@ -14,9 +14,10 @@ import {StorageProvider} from '../../providers/storage-provider'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public provider: StorageProvider, public api: ApiProvider) {
-
+  public events: Events;
+  constructor(public navCtrl: NavController, public provider: StorageProvider, public api: ApiProvider, public eve: Events) {
     if (provider.isLoggedIn()) {
+      eve.publish("user:loggedIn", true);
       console.log("Logged In");
       api.getAllDoctors()
         .subscribe(user => {
@@ -34,5 +35,4 @@ export class HomePage {
   ionViewDidLoad() {
     console.log('Hello Home Page');
   }
-
 }

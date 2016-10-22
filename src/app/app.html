@@ -6,10 +6,9 @@
       <ion-avatar item-left>
         <img src="http://placehold.it/80x80">
       </ion-avatar>
-      <h2 *ngIf="loggedIn">{{ loggenUser.name}}</h2>
-      <p *ngIf="loggedIn">{{ loggenUser.email}}</p>
+      <h2 *ngIf="loggedIn">{{ loggedUser.name}}</h2>
+      <p *ngIf="loggedIn">{{ loggedUser.email}}</p>
     </ion-item>
-
   </ion-header>
 
   <ion-content>
@@ -27,6 +26,8 @@
         <ion-icon name="md-exit" item-left></ion-icon>
         Logout
       </button>
+
+
 
     </ion-list>
   </ion-content>

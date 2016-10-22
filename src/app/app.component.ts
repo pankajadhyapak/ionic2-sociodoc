@@ -1,8 +1,7 @@
 import {Component, ViewChild} from "@angular/core";
-import {Platform, MenuController, Nav} from "ionic-angular";
+import {Platform, MenuController, Nav, Events} from "ionic-angular";
 import {StatusBar} from "ionic-native";
 import {HomePage} from "../pages/home/home";
-import {StorageProvider} from "../providers/storage-provider";
 import {LoginPage} from "../pages/login/login";
 import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
 
@@ -16,16 +15,16 @@ export class MyApp {
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any, icon: string}>;
   loggedIn: boolean = false;
-  loggenUser: any;
+  loggedUser: any = {name:"", email:""};
 
   constructor(public platform: Platform,
               public menu: MenuController,
-              public provider: StorageProvider) {
+              public events: Events) {
     this.initializeApp();
     if (window.localStorage['loggedIn']) {
       this.rootPage = HomePage;
       this.loggedIn = true;
-      this.loggenUser = JSON.parse(window.localStorage['loggenUser']);
+      this.loggedUser = JSON.parse(window.localStorage['loggenUser']);
     } else {
       this.rootPage = LoginPage;
       this.loggedIn = false;
@@ -35,6 +34,11 @@ export class MyApp {
       {title: 'Home', component: HomePage, icon: 'md-home'},
       {title: 'All Doctors', component: AllDoctorsPage, icon: 'md-people'}
     ];
+
+    events.subscribe('user:loggedIn', (userEventData) => {
+      this.loggedUser = JSON.parse(window.localStorage['loggenUser']);
+      console.log("user logged in");
+    });
   }
 
   initializeApp() {
@@ -59,6 +63,8 @@ export class MyApp {
   logOut() {
     this.menu.close();
     window.localStorage.clear();
-    this.nav.setRoot(LoginPage);
+    this.nav.popAll();
+    this.nav.push(LoginPage);
+
   }
 }
