@@ -8,6 +8,8 @@ import {StorageProvider} from "../providers/storage-provider";
 import {AuthProvider} from "../providers/auth-provider";
 import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
 import {ApiProvider} from "../providers/api-provider";
+import {MyCasesPage} from "../pages/my-cases/my-cases";
+import {ReceivedCasesPage} from "../pages/received-cases/received-cases";
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import {ApiProvider} from "../providers/api-provider";
     HomePage,
     LoginPage,
     RegisterPage,
-    AllDoctorsPage
+    AllDoctorsPage,
+    MyCasesPage,
+    ReceivedCasesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +30,9 @@ import {ApiProvider} from "../providers/api-provider";
     HomePage,
     LoginPage,
     RegisterPage,
-    AllDoctorsPage
+    AllDoctorsPage,
+    MyCasesPage,
+    ReceivedCasesPage
   ],
   providers: [StorageProvider, AuthProvider, ApiProvider]
 })

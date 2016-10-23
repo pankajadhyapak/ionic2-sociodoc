@@ -4,6 +4,8 @@ import {StatusBar} from "ionic-native";
 import {HomePage} from "../pages/home/home";
 import {LoginPage} from "../pages/login/login";
 import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
+import {MyCasesPage} from "../pages/my-cases/my-cases";
+import {ReceivedCasesPage} from "../pages/received-cases/received-cases";
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +17,7 @@ export class MyApp {
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any, icon: string}>;
   loggedIn: boolean = false;
-  loggedUser: any = {name:"", email:""};
+  loggedUser: any = {name: "", email: ""};
 
   constructor(public platform: Platform,
               public menu: MenuController,
@@ -32,7 +34,9 @@ export class MyApp {
     // set our app's pages
     this.pages = [
       {title: 'Home', component: HomePage, icon: 'md-home'},
-      {title: 'All Doctors', component: AllDoctorsPage, icon: 'md-people'}
+      {title: 'All Doctors', component: AllDoctorsPage, icon: 'md-people'},
+      {title: 'My Cases', component: MyCasesPage, icon: 'md-albums'},
+      {title: 'Received Cases', component: ReceivedCasesPage, icon: 'md-share'}
     ];
 
     events.subscribe('user:loggedIn', (userEventData) => {
