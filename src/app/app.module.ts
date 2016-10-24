@@ -10,7 +10,7 @@ import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
 import {ApiProvider} from "../providers/api-provider";
 import {MyCasesPage} from "../pages/my-cases/my-cases";
 import {ReceivedCasesPage} from "../pages/received-cases/received-cases";
-
+import {CaseDetailPage} from "../pages/case-detail/case-detail";
 @NgModule({
   declarations: [
     MyApp,
@@ -19,7 +19,8 @@ import {ReceivedCasesPage} from "../pages/received-cases/received-cases";
     RegisterPage,
     AllDoctorsPage,
     MyCasesPage,
-    ReceivedCasesPage
+    ReceivedCasesPage,
+    CaseDetailPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,7 +33,8 @@ import {ReceivedCasesPage} from "../pages/received-cases/received-cases";
     RegisterPage,
     AllDoctorsPage,
     MyCasesPage,
-    ReceivedCasesPage
+    ReceivedCasesPage,
+    CaseDetailPage
   ],
   providers: [StorageProvider, AuthProvider, ApiProvider]
 })

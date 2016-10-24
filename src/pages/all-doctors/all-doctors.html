@@ -20,10 +20,15 @@
       </ion-avatar>
       <h2>{{ doc.name }}</h2>
       <p>{{ doc.specialization }} - {{ doc.location }}</p>
-      <ion-icon *ngIf="doc.isFriend == 'NOTSENT'" name="md-person-add" item-right></ion-icon>
-      <ion-icon *ngIf="doc.isFriend == 'ACCEPTED'" name="md-checkmark-circle-outline" item-right></ion-icon>
-      <ion-icon *ngIf="doc.isFriend == 'RECEIVED'" name="md-exit" item-right></ion-icon>
-
+      <button ion-button clear item-right icon-only  *ngIf="doc.isFriend == 'NOTSENT'" >
+      <ion-icon name="md-person-add" ></ion-icon>
+      </button>
+      <button ion-button clear item-right icon-only *ngIf="doc.isFriend == 'ACCEPTED'" >
+      <ion-icon name="md-checkmark-circle-outline"></ion-icon>
+      </button>
+      <button ion-button clear item-right icon-only *ngIf="doc.isFriend == 'RECEIVED'">
+      <ion-icon  name="md-exit"></ion-icon>
+    </button>
     </ion-item>
   </ion-list>
 

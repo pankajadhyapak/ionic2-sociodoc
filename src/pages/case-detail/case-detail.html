@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar no-border-bottom color="primary">
+    <ion-title>
+      Case Details
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="details">
+        Case Details
+      </ion-segment-button>
+      <ion-segment-button value="images">
+        Case Images
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="pet">
+    <div *ngSwitchCase="'details'">
+         <ion-card>
+          <ion-card-header>
+            General Details
+          </ion-card-header>
+          <ion-card-content>
+            The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+          </ion-card-content>
+        </ion-card>
+
+         <ion-card>
+          <ion-card-header>
+            Investigation Details
+          </ion-card-header>
+          <ion-card-content>
+            The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+          </ion-card-content>
+        </ion-card>
+
+         <ion-card>
+          <ion-card-header>
+            General Physical Examination
+          </ion-card-header>
+          <ion-card-content>
+            The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+          </ion-card-content>
+        </ion-card>
+
+         <ion-card>
+          <ion-card-header>
+            Treatment Information
+          </ion-card-header>
+          <ion-card-content>
+            The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.
+          </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div *ngSwitchCase="'images'">
+        <ion-card *ngFor="let img of SingleCase.images">
+            <img src="http://api5.sociodoc.com/cases/images/{{img.path }}"/>
+        </ion-card>
+    </div>
+  </div>
+
+    <ion-fab bottom right>
+    <button ion-fab color="primary"><ion-icon name="md-chatbubbles"></ion-icon></button>
+  </ion-fab>
+</ion-content>

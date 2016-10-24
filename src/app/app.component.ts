@@ -69,6 +69,5 @@ export class MyApp {
     window.localStorage.clear();
     this.nav.popAll();
     this.nav.push(LoginPage);
-
   }
 }
