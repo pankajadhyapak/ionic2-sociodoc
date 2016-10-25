@@ -1,6 +1,6 @@
 import {Component, ViewChild} from "@angular/core";
-import {Platform, MenuController, Nav, Events} from "ionic-angular";
-import {StatusBar} from "ionic-native";
+import {Platform, MenuController, Nav, Events, AlertController} from "ionic-angular";
+import {StatusBar, Push, Splashscreen} from "ionic-native";
 import {HomePage} from "../pages/home/home";
 import {LoginPage} from "../pages/login/login";
 import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
@@ -18,15 +18,20 @@ export class MyApp {
   pages: Array<{title: string, component: any, icon: string}>;
   loggedIn: boolean = false;
   loggedUser: any = {name: "", email: ""};
+  alertCtrl: AlertController;
 
   constructor(public platform: Platform,
               public menu: MenuController,
-              public events: Events) {
+              public events: Events,
+              public alrtCtrl: AlertController) {
+    this.alertCtrl = alrtCtrl;
     this.initializeApp();
+
     if (window.localStorage['loggedIn']) {
       this.rootPage = HomePage;
       this.loggedIn = true;
       this.loggedUser = JSON.parse(window.localStorage['loggenUser']);
+      this.generateToken();
     } else {
       this.rootPage = LoginPage;
       this.loggedIn = false;
@@ -45,10 +50,58 @@ export class MyApp {
     });
   }
 
+  generateToken(){
+    let push = Push.init({
+        android: {
+          senderID: "1037127861519"
+        },
+        ios: {
+          alert: "true",
+          badge: false,
+          sound: "true"
+        },
+        windows: {}
+      });
+
+      push.on('registration', (data) => {
+        console.log("device token ->", data.registrationId);
+        alert(data.registrationId);
+        //TODO - send device token to server
+      });
+      push.on('notification', (data) => {
+        console.log('message', data.message);
+        let self = this;
+        //if user using app and push notification comes
+        if (data.additionalData.foreground) {
+          // if application open, show popup
+          let confirmAlert = this.alertCtrl.create({
+            title: 'New Notification',
+            message: data.message,
+            buttons: [{
+              text: 'Ignore',
+              role: 'cancel'
+            }, {
+              text: 'View',
+              handler: () => {
+                //TODO: Your logic here
+                self.nav.push(HomePage, {message: data.message});
+              }
+            }]
+          });
+          confirmAlert.present();
+        } else {
+          //if user NOT using app and push notification comes
+          //TODO: Your logic on click of push notification directly
+          self.nav.push(HomePage, {message: data.message});
+          console.log("Push notification clicked");
+        }
+      });
+      push.on('error', (e) => {
+        console.log(e.message);
+      });
+  }
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
   }

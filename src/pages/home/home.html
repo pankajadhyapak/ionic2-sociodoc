@@ -9,9 +9,38 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Home view page</h3>
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Recently Added Cases
+    </ion-list-header>
+    <div *ngFor="let case of myCases;  let i=index" >
+    <ion-item *ngIf="i<3" (click)="showCaseDetail(case)">
+      <h2>{{case.caseIdentifier}}</h2>
+      <p>{{ case.created_at }}</p>
+      <button ion-button clear item-right icon-only>
+      <ion-icon name="md-share" ></ion-icon>
+      </button>
+    </ion-item>
+</div>
+  </ion-list>
 
+  <ion-list>
+    <ion-list-header>
+      Recently Received Cases
+    </ion-list-header>
+    <div *ngFor="let case of receivedCases;  let i=index">
+    <ion-item  *ngIf="i<3" (click)="showCaseDetail(case)">
+      <ion-avatar item-left>
+        <img src="http://placehold.it/80x80">
+      </ion-avatar>
+      <h2>{{ case.user.name }}</h2>
+      <h3>{{ case.user.specialization }} - {{ case.user.location }}</h3>
+      <p>{{case.caseIdentifier}}</p>
+      <p>{{case.created_at}}</p>
+    </ion-item>
+    </div>
+  </ion-list>
   <ion-fab bottom right>
     <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
