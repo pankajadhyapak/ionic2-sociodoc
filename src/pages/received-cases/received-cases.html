@@ -15,7 +15,7 @@
   <ion-card *ngFor="let case of receivedCases" (click)="showCaseDetail(case)">
     <ion-item>
       <ion-avatar item-left>
-        <img src="http://placehold.it/80x80">
+        <img src="{{ 'assets/avatars/svg/' + case.user.name.slice(0, 1).toUpperCase() + '.svg' }}">
       </ion-avatar>
       <h2>{{ case.user.name }}</h2>
       <p>{{ case.user.specialization }} - {{ case.user.location }}</p>

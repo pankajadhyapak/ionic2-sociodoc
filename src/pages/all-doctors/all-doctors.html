@@ -12,11 +12,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="all-doctors">
   <ion-list class>
     <ion-item *ngFor="let doc of allDoctors">
       <ion-avatar item-left>
-        <img src="http://placehold.it/80x80">
+        <img src="{{ 'assets/avatars/svg/' + doc.name.slice(0, 1).toUpperCase() + '.svg' }}">
       </ion-avatar>
       <h2>{{ doc.name }}</h2>
       <p>{{ doc.specialization }} - {{ doc.location }}</p>

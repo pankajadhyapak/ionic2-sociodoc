@@ -8,6 +8,7 @@ import {StorageProvider} from "../providers/storage-provider";
 import {AuthProvider} from "../providers/auth-provider";
 import {AllDoctorsPage} from "../pages/all-doctors/all-doctors";
 import {ApiProvider} from "../providers/api-provider";
+import {Utils} from "../providers/utils";
 import {MyCasesPage} from "../pages/my-cases/my-cases";
 import {ReceivedCasesPage} from "../pages/received-cases/received-cases";
 import {CaseDetailPage} from "../pages/case-detail/case-detail";
@@ -36,7 +37,7 @@ import {CaseDetailPage} from "../pages/case-detail/case-detail";
     ReceivedCasesPage,
     CaseDetailPage
   ],
-  providers: [StorageProvider, AuthProvider, ApiProvider]
+  providers: [StorageProvider, AuthProvider, ApiProvider, Utils]
 })
 export class AppModule {
 }
