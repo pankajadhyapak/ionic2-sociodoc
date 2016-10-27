@@ -16,7 +16,7 @@
   <ion-list class>
     <ion-item *ngFor="let doc of allDoctors">
       <ion-avatar item-left>
-        <img src="{{ 'assets/avatars/svg/' + doc.name.slice(0, 1).toUpperCase() + '.svg' }}">
+        <img src="{{ 'assets/avatars/' + doc.name.slice(0, 1).toUpperCase() + '.png' }}">
       </ion-avatar>
       <h2>{{ doc.name }}</h2>
       <p>{{ doc.specialization }} - {{ doc.location }}</p>

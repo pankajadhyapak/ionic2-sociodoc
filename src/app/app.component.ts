@@ -31,7 +31,7 @@ export class MyApp {
       this.rootPage = HomePage;
       this.loggedIn = true;
       this.loggedUser = JSON.parse(window.localStorage['loggenUser']);
-      
+
     } else {
       this.rootPage = LoginPage;
       this.loggedIn = false;
@@ -103,6 +103,8 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
+      StatusBar.styleLightContent();
+      Splashscreen.hide();
       if(this.loggedIn){
         //this.generateToken();
       }

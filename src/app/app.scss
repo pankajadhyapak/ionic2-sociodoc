@@ -18,3 +18,22 @@
 .nav-bar .item-inner{
     border-bottom: 0px !important;
 }
+
+.side-nav{
+  .item-block:first-child,.item-wrapper:first-child .item-block {
+    border-top: 0px;
+  }
+
+  .item-block:last-child,.item-wrapper:last-child .item-block {
+    border-bottom: 0px;
+  }
+
+  .item-block .item-inner {
+    border-bottom: 0px;
+  }
+
+  button.item-block{
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}

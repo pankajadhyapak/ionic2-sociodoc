@@ -32,7 +32,7 @@
     <div *ngFor="let case of receivedCases;  let i=index">
     <ion-item  *ngIf="i<3" (click)="showCaseDetail(case)">
       <ion-avatar item-left>
-        <img src="{{ 'assets/avatars/svg/' + case.user.name.slice(0, 1).toUpperCase() + '.svg' }}">
+        <img src="{{ 'assets/avatars/' + case.user.name.slice(0, 1).toUpperCase() + '.png' }}">
       </ion-avatar>
       <h2>{{ case.user.name }}</h2>
       <h3>{{ case.user.specialization }} - {{ case.user.location }}</h3>
